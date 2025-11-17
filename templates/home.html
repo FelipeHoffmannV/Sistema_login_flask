@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Inicial</title>
+    <!-- Carrega o Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Estilo para a mensagem de alerta */
+        .alert-fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900 flex items-center justify-center min-h-screen">
+
+    <div class="bg-white w-full max-w-2xl p-8 shadow-lg rounded-2xl text-center">
+        
+        <!-- Alerta dinâmico -->
+        <div id="alert-container" class="mb-6">
+            <!-- O JavaScript irá inserir a mensagem aqui -->
+        </div>
+
+        <h1 class="text-3xl font-bold text-gray-800 mb-4">Bem-vindo(a) à Página Inicial!</h1>
+        <p class="text-lg text-gray-600 mb-8">
+            Este é o seu painel principal. Você está autenticado no sistema.
+        </p>
+
+        <!-- Conteúdo de exemplo -->
+        <div class="border-t border-gray-200 pt-6">
+            <h2 class="text-xl font-semibold text-gray-700 mb-4">Seu Conteúdo Exclusivo</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <h3 class="font-medium text-blue-600">Perfil</h3>
+                    <p class="text-sm text-gray-600">Veja e edite suas informações.</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <h3 class="font-medium text-blue-600">Configurações</h3>
+                    <p class="text-sm text-gray-600">Ajuste as preferências da sua conta.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botão de Logout (Exemplo) -->
+        <div class="mt-10">
+            <!-- No Flask, você faria este link apontar para sua rota de logout -->
+            <a href="/logout" class="w-full sm:w-auto inline-block bg-red-600 text-white font-medium py-3 px-6 rounded-lg shadow-md hover:bg-red-700 transition duration-300">
+                Sair (Logout)
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Pega os parâmetros da URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const action = urlParams.get('action');
+
+            const alertContainer = document.getElementById('alert-container');
+            let message = '';
+            let alertClass = '';
+
+            if (action === 'login') {
+                message = '<strong>Login realizado com sucesso!</strong> Bem-vindo(a) de volta.';
+                alertClass = 'bg-green-100 border-green-400 text-green-700';
+            } else if (action === 'register') {
+                message = '<strong>Cadastro concluído!</strong> Seu login foi efetuado automaticamente.';
+                alertClass = 'bg-blue-100 border-blue-400 text-blue-700';
+            }
+
+            // Se houver uma mensagem, exibe o alerta
+            if (message) {
+                alertContainer.innerHTML = `
+                    <div class="${alertClass} border-l-4 p-4 rounded-md shadow-sm alert-fade-in" role="alert">
+                        <p>${message}</p>
+                    </div>
+                `;
+            }
+        });
+    </script>
+
+</body>
+</html>

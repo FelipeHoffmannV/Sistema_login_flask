@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+    <div class="container-register-login">
+    <h1>Registre-se em nosso site!</h1>
+
+<form action="/register" method="post">
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Nome: </label>
+    <input name="nomeForm" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Senha: </label>
+    <input name="senhaForm" type="password" class="form-control" id="exampleInputPassword1">
+  </div>
+  <div class="mb-3">
+        <a href="/login" class="btn btn-success">Já possui cadastro? Clique aqui e faça seu login!</a>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+</div>
+{% endblock %}
